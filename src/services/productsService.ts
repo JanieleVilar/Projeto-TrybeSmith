@@ -1,9 +1,12 @@
 import { Product } from '../intefaces';
-import addProduct from '../models/productsModel';
+import { addProduct, listProducts } from '../models/productsModel';
 
-const addProductService = async (product: Product) => {
+export const addProductService = async (product: Product) => {
   const result = await addProduct(product);
   return result;
 };
 
-export default addProductService;
+export const listProductsService = async () => {
+  const result = await listProducts();
+  return result;
+};

@@ -1,12 +1,15 @@
 import { Request, Response } from 'express';
 import { Product } from '../intefaces';
-import addProductService from '../services/productsService';
+import { addProductService, listProductsService } from '../services/productsService';
 
-const addProductController = async (req: Request, res: Response) => {
+export const addProductController = async (req: Request, res: Response) => {
   const product = req.body as Product;
   
   const result = await addProductService(product);
   res.status(201).json(result);
 };
 
-export default addProductController;
+export const listProducts = async (_req: Request, res: Response) => {
+  const result = await listProductsService();
+  res.json(result);
+};
