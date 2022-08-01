@@ -4,8 +4,11 @@ import addUserService from '../services/usersService';
 
 const addUserController = async (req: Request, res: Response) => {
   const user = req.body as User;
-  const result = await addUserService(user);
-  res.status(201).json(result);
+  const { status, message, token } = await addUserService(user);
+  if (message) {
+    return res.status(status).json({ message }); 
+  }
+  return res.status(status).json({ token });
 };
 
 export default addUserController;
