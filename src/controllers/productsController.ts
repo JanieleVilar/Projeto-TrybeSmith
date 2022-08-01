@@ -5,8 +5,11 @@ import { addProductService, listProductsService } from '../services/productsServ
 export const addProductController = async (req: Request, res: Response) => {
   const product = req.body as Product;
   
-  const result = await addProductService(product);
-  res.status(201).json(result);
+  const { status, message, result } = await addProductService(product);
+  if (message) {
+    return res.status(status).json({ message });
+  }
+  res.status(status).json(result);
 };
 
 export const listProducts = async (_req: Request, res: Response) => {
